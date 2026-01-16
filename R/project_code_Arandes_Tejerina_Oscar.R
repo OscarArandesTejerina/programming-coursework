@@ -4,8 +4,6 @@
 ##########-----------Oscar Arandes Tejerina----------########## 
 ###############################################################
 
-getwd()
-setwd("D:/STOCKHOLM/Courses/Södetorns Högskola/Statistical analyses and visualization in R (I)/Part 7. Project Work")
 #install.packages("tidyverse")
 #install.packages("corrplot")
 #install.packages("showtext")
@@ -131,75 +129,6 @@ contrib1 |>
   corrplot(is.cor = FALSE, 
            cl.align.text = "l", 
            tl.col = "black")  
-
-
-##########################
-##### Question Extra #####
-##########################
-# Is there a correlation between a customer’s bank balance and their 
-# subscription to a term deposit?
-
-# Box Plot (outliers removed!)
-data_bank_clean |> 
-  ggplot(aes(x = deposit, y = balance)) +
-  geom_boxplot(fill = "skyblue", color = "darkblue", outlier.shape = NA) +
-  labs(
-    x = "Subscribed to Term Deposit",
-    y = "Balance"
-  ) +
-  ylim(0, 4500) +
-  theme_bw() +
-  theme(
-    aspect.ratio = 0.8,
-    legend.position = "none",  
-    text = element_text(size = 20, family = "LM Roman")  
-  ) 
-
-# Histogram
-data_bank_clean |>
-ggplot(aes(x = balance)) +
-  geom_histogram(binwidth = 500, fill = "skyblue", color = "darkblue") +
-  labs(
-    x = "Balance",
-    y = "Frequency") +
-  theme_bw() +
-  theme(
-    aspect.ratio = 0.8,
-    legend.position = "none",  
-    text = element_text(size = 20, family = "LM Roman")  
-  ) 
-
-# Logistic Regression Visualization
-data_bank_clean |> 
-  mutate(deposit_num = ifelse(deposit == "yes", 1, 0)) |>
-  ggplot(aes(x = balance, y = deposit_num)) +
-  geom_smooth(
-    method = "glm", 
-    method.args = list(family = "binomial"), 
-    se = FALSE,
-    color = "darkgreen"
-  ) +
-  geom_point(aes(col = deposit)) +
-  labs(
-    x = "Balance",
-    y = "Probability",
-    color = "Subscription\nStatus"
-  ) +
-  theme_bw() +
-  theme(
-    aspect.ratio = 0.8,
-    panel.grid = element_blank(),  
-    text = element_text(size = 20, family = "LM Roman")  
-  ) 
-
-# Logistic Regression Model (f(x)~x)
-model_balance <- glm(deposit ~ balance, data = data_bank_clean, family = "binomial")
-summary(model_balance)
-
-# are assumptions met??????????
-
-
-
 
 
 
