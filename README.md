@@ -9,7 +9,8 @@ experience using different programming languages, including:
 
 - Python
 - R
-- SQL 
+- SQL
+- Altair RapidMiner and KNIME
 
 Each assignment is organized by course.
 
